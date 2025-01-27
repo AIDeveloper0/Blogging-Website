@@ -5,11 +5,15 @@ on:
     branches:
       - develop  # This ensures the workflow runs when pushing to the 'develop' branch
 
+permissions:
+  contents: read  # Grants read access to the repository contents
+  id-token: write  # Grants write access to the ID token, necessary for GitHub Pages deployment
+
 jobs:
   build:
     name: Build Job
     runs-on: ubuntu-latest
-    
+
     steps:
       # Checkout the code
       - name: Checkout Code
@@ -19,23 +23,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'  # Updated to Node.js version 18
+          node-version: '18'  # Ensure Node.js version 18 is used
 
       # Install dependencies
       - name: Install dependencies
         run: |
           npm install
           
-      # Print directory structure to ensure index.html is in the correct place
-      - name: Print directory structure
-        run: |
-          ls -R  # This will print all files and directories
-
       # Build the static website using Parcel
       - name: Build the website using Parcel
         run: |
           npx parcel build index.html --no-source-maps  # Ensure the correct path to index.html
-          
+
       # Upload the build artifact (the static files)
       - name: Upload Artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
