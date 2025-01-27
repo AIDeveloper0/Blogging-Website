@@ -1,0 +1,10 @@
+/* blog.css */
+body {
+  font-family: 'Helvetica', sans-serif;
+  background-color: #fafafa;
+}
+
+h1 {
+  color: #222;
+  text-align: center;
+}
