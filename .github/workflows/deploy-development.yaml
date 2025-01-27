@@ -7,7 +7,8 @@ on:
 
 permissions:
   contents: read  # Grants read access to the repository contents
-  id-token: write  # Grants write access to the ID token, necessary for GitHub Pages deployment
+  id-token: write  # Grants write access to the ID token for authentication
+  pages: write  # Grants write access to GitHub Pages
 
 jobs:
   build:
