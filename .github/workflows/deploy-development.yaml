@@ -56,4 +56,4 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
-          branch: gh-pages  # The branch that GitHub Pages will use
+          branch: develop  # The branch that GitHub Pages will use
