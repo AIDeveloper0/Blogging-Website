@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages (Development)
+
+on:
+  push:
+    branches:
+      - develop  # This ensures the workflow runs when pushing to the 'develop' branch
+
+jobs:
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Build the static website using Parcel
+      - name: Build the website using Parcel
+        run: |
+          npx parcel build src/index.html --no-minify --no-source-maps
+
+      # Upload the build artifact (the static files)
+      - name: Upload Artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist  # The build output folder that Parcel generates
+
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    needs: build  # The 'deploy' job runs only after 'build' job succeeds
+    
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          branch: gh-pages  # The branch that GitHub Pages will use
