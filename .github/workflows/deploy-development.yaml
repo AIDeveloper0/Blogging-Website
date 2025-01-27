@@ -25,10 +25,17 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          
+      # Print directory structure to ensure index.html is in the correct place
+      - name: Print directory structure
+        run: |
+          ls -R  # This will print all files and directories
+
       # Build the static website using Parcel
       - name: Build the website using Parcel
         run: |
-          npx parcel build src/index.html --no-source-maps  # Removed --no-minify flag
+          npx parcel build src/index.html --no-source-maps  # Ensure the correct path to index.html
+          
       # Upload the build artifact (the static files)
       - name: Upload Artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
