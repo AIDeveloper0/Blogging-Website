@@ -2,7 +2,7 @@
   "name": "blogging-website",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",  // Change this from "index.js" to "index.html"
+  "main": "index.html",  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,6 @@
     // Your dependencies
   },
   "devDependencies": {
-    "parcel": "^2.13.3"  // Ensure Parcel is listed in the devDependencies
+    "parcel": "^2.13.3"
   }
 }
